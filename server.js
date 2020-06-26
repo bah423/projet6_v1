@@ -20,7 +20,7 @@ db.mongoose.connect("", {
 }).then (() =>{
     console.log("Connexion to MongoDB: Ok")
 }).catch(err => {
-   console.error("Connexion to MongoDB: Fail", +err);
+   console.error("Connexion to MongoDB: Fail !", +err);
 })
 
 function initial (){
@@ -28,7 +28,7 @@ function initial (){
         if(!err && count == 0){
             new role({name: "user"}).save(err =>{
                 if(err){
-                console.log("Save user failed", err);
+                console.log("Save user failed !", err);
                 }
                 console.log("role user add");
             });

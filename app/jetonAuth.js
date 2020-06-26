@@ -29,7 +29,8 @@ checktadmin = (req, res, next) =>{
         }
         ROLES.find({
            _id: user.role
-        },(err, role) =>{
+        },
+        (err, role) =>{
             if(err){
                 res.status(500).send({message: err});
                 return
