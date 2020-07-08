@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const sauceRouter = require('./routes/sauce.route');
+const path = require("path")
 
 //const formidable = require("express-formidable");
 
@@ -21,7 +22,7 @@ app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
-
+app.use(express.static(path.join(__dirname, 'public')));
 // parse requests of content-type - application/x-www-form-urlencoded
 //app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -92,7 +93,7 @@ function initial() {
   });
   */
 //Créer l'api sauces
-app.use('/api/sauces', (req, res, next) =>{
+/*app.use('/api/sauces', (req, res, next) =>{
   const sauces = [
     {
       _id : "id", 
@@ -110,7 +111,7 @@ app.use('/api/sauces', (req, res, next) =>{
     res.status(200).json(sauces);
   next();
 });
-module.exports = app;
+module.exports = app;*/
 /*app.use('/api/sauces', (req, res, next) =>{
   const sauces = [
     {

@@ -25,13 +25,24 @@ module.exports = function(app) {
 };
 */
 
-sauceRouter.route('/')
-    .post(controller.addSauce)
+
+
+    sauceRouter.route('/')
+    .post(controller.uploadImage ,controller.addSauce)
     .get(controller.allSauces)
+    
+     sauceRouter
+    .get("/:sauceId", controller.SauceById)
+    .put("/:sauceId", controller.uploadImage , controller.updateSauce)
+    .delete("/:sauceId",controller.deleteSauce)
 
 
 
-sauceRouter    
-    .put("/:sauceId", controller.updateSauce)
+
+ 
+
+
+
+
 module.exports = sauceRouter;
 

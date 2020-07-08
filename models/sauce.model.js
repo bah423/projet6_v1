@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const Sauce = mongoose.model(
   "Sauce",
-  new mongoose.Schema({ 
+  new mongoose.Schema({
+    userId: String, 
     name: String ,
     manufacturer: String ,
     description: String ,
@@ -15,4 +16,5 @@ const Sauce = mongoose.model(
     usersDisliked: [String] 
   })
 );
+
 module.exports = Sauce;
