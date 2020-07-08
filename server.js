@@ -1,11 +1,22 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const formidable = require("express-formidable");
+const sauceRouter = require('./routes/sauce.route');
+
+//const formidable = require("express-formidable");
 
 const app = express();
 
-app.options("*", cors());
+var corsOptions = {
+  origin: 'http://localhost:4200',
+  optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions));
+
+
+
+
+//app.options("*", cors());
 //app.use(formidable());
 
 // parse requests of content-type - application/json
@@ -61,6 +72,7 @@ function initial() {
     });
 }
  // Add headers
+ /*
  app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
@@ -78,11 +90,55 @@ function initial() {
     // Pass to next layer of middleware
     next();
   });
+  */
+//Créer l'api sauces
+app.use('/api/sauces', (req, res, next) =>{
+  const sauces = [
+    {
+      _id : "id", 
+      name: "name" ,
+      manufacturer: "manufacturer" ,
+      description: "description",
+      heat:"heat",
+      likes: "likes", 
+      dislikes: "dislikes",
+      imageUrl: "image",
+      mainPepper:"mainPepper", 
+      usersLiked:"usersLiked",
+      usersDisliked:"usersDisliked"
+    }];
+    res.status(200).json(sauces);
+  next();
+});
+module.exports = app;
+/*app.use('/api/sauces', (req, res, next) =>{
+  const sauces = [
+    {
+      _id : "id", 
+      name: "name" ,
+      manufacturer: "manufacturer" ,
+      description: "description",
+      heat:"heat",
+      likes: "likes", 
+      dislikes: "dislikes",
+      imageUrl: "image",
+      mainPepper:"mainPepper", 
+      usersLiked:"usersLiked",
+      usersDisliked:"usersDisliked"
+    }];
+    res.status(200).json(sauces);
+  next();
+});
+module.exports = app;*/
+
+
+
 
 // routes
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
-require('./routes/sauce.route')(app);
+//require('./routes/sauce.route')(app);
+app.use("/api/sauces", sauceRouter);
 
 // simple route
 app.get("/", (req, res) => {

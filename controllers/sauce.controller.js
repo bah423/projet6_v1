@@ -28,33 +28,111 @@ const Sauce = db.sauce;
   });
 };*/
 //mon petit code
-exports.addSauce = (req, res, next) => {
+/*exports.addSauce = (req, res) => {
   console.log("On veut ajouter une sauce");
-  //delete req.body._id;
-  console.log(req.body.name);
-  console.log(req.body.manufacturer);
-  console.log(req.body.imageUrl );
+  Sauce.create(req.body)
+  .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
+  .catch(error => res.status(400).json({ error }));
+};*/
+/*exports.addSauce = (req, res, next) => {
+  delete req.body._id;
+  const sauce = new Sauce({
+    ...req.body
+  });
+  sauce.save()
+    .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
+    .catch(error => res.status(400).json({ error }));
+};*/
+exports.addSauce = (req, res, next) => {
+  const sauce = new Sauce({
+    userId: req.body.userId, 
+    name: req.body.name ,
+    manufacturer: req.body.manufacturer ,
+    description: req.body.description,
+    mainPepper: req.body.mainPepper ,
+    image: req.body.imageUrl ,
+    heat: req.body.heat  
+  });
+  delete req.body._id;
+  sauce.save()
+    .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
+    .catch(error => res.status(400).json({ error }));
+}
+/*
+exports.addSauce = (req, res) => {
+    console.log("On veut ajouter une sauce");
+    Sauce.create(req.body)
+    .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
+    .catch(error => res.status(400).json({ error }));
+};*/
+
+/*exports.updateSauce = (req, res) =>{
+    Sauce.findByIdAndUpdate(req.params.sauceId, {
+      $set: req.body
+    }, {new: true})
+        .then((sauce) =>{
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'application/json');
+          res.satus(201).json({message: 'objet modifié !'})
+        })
+        .catch((err) => next(err));
+};*/
+exports.updateSauce = (req, res) =>{
+  Sauce.updateOne({sauceId: req.params.sauceId}, {
+    $set: req.body
+  }, {new: true})
+      .then((sauce) =>{
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.satus(201).json({message: 'objet modifié !'})
+      })
+      .catch((err) => next(err));
+};
+
+exports.allSauces = (req, res) =>{
+    Sauce.find()
+        .then((sauces) =>{
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'application/json');
+          res.json(sauces)
+       }).catch((err) => next(err));
+}
+
+
+
+  /*//delete req.body._id;
    const sauce = new Sauce({
       //...req.body
-      sauceId: req.body.sauceId, 
+      //sauceId: req.body.sauceId, 
       name: req.body.name,
       manufacturer:  req.body.manufacturer ,
       description: req.body.description ,
       imageUrl: req.body.imageUrl ,
       heat: req.body.heat ,
+      userId: req.body.userId,
       /*mainPepper: req.body ,
       likes: req.body ,
       dislikes: number ,
       usersLiked: [string] ,
-      usersDisliked: [string] */
+      usersDisliked: [string] 
   });
-   
+  console.log(req.body.name);
+  console.log(req.body.manufacturer);
+  console.log(req.body.imageUrl );
+  //enregistrer la sauce 
   sauce.save((error, sauce) => {
-   
   })
     .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
     .catch(error => res.status(400).json({ error }));
-};
+*/
+  
+
+
+
+
+
+
+
 
 /* expriration
 exports.signup = (req, res) => {

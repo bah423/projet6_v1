@@ -1,6 +1,7 @@
 const db = require("../models");
 const Sauce = db.sauce;
 
+//Vérification si la sauce est présente dans la base de données
 checkDuplicateSauceName = (req, res, next) => {
     // SauceName
     console.log("requete: "+req.fields);
