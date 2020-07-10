@@ -79,4 +79,32 @@ exports.SauceById = (req, res,next) => {
           res.status(201).json(sauce)
       }).catch((err) => next(err));
 }
-
+//La partie like et dislike
+var contLikes = 0;
+var like = 0;
+//var disLike = 0;
+var contDisLikes = 0;
+liked = true;
+exports.likeDislike = (req, res,next) => {
+    Sauce.create(req.params.sauceId.userId)
+        .then((sauce) => {
+            console.log("mes likes");
+            res.statusCode = 200;
+            if(like == 1){
+                liked = true;
+                contLikes += 1;
+                usersLiked.push(contLikes);
+            }else if(like == -1){
+                liked = false;
+                contDisLikes += 1;
+                usersDisLiked.push(contLikes);
+            }else if(like == 0){
+                liked = true || false;
+                contLikes += 1;
+                contDisLikes += 1;
+            }
+            console.log(contLikes);
+            res.setHeader('Content-Type', 'application/json');
+            res.status(201).json({message: 'Sauce liked !'})
+        }).catch((err) => next(err));
+   };

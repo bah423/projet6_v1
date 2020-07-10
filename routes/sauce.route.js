@@ -35,12 +35,7 @@ module.exports = function(app) {
     .get("/:sauceId", controller.SauceById)
     .put("/:sauceId", controller.uploadImage , controller.updateSauce)
     .delete("/:sauceId",controller.deleteSauce)
-
-
-
-
- 
-
+    .post("/:sauceId/like", controller.likeDislike)
 
 
 

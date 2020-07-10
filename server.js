@@ -138,7 +138,6 @@ module.exports = app;*/
 // routes
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
-//require('./routes/sauce.route')(app);
 app.use("/api/sauces", sauceRouter);
 
 // simple route
