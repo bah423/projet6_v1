@@ -16,5 +16,4 @@ const Sauce = mongoose.model(
     usersDisliked: [String] 
   })
 );
-
 module.exports = Sauce;
